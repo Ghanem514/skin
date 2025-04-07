@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image
 
 # Load trained model
-model = load_model("model.h5")
+model = load_model("my_cnn_model3.h5")
 
 # Updated class names
 class_names = [

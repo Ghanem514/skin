@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image
 
 # Load trained model
-model = load_model("model.h5")
+model = load_model("model/skin_disease_model.h5")
 
 # Updated class names
 class_names = [
@@ -30,7 +30,7 @@ if uploaded_file is not None:
     st.image(image, caption="Uploaded Image", use_column_width=True)
 
     # Preprocess
-    img = image.resize((128, 128))  # Resize to your model's input size
+    img = image.resize((224, 224))  # Resize to your model's input size
     img_array = img_to_array(img) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
 
@@ -38,7 +38,7 @@ if uploaded_file is not None:
     prediction = model.predict(img_array)
 
     # Debugging the prediction output
-    st.write("Raw prediction:", prediction)
+    st.write("Raw prediction values:", prediction[0])
     st.write("Prediction shape:", prediction.shape)
 
     # Check if the prediction output matches the number of classes

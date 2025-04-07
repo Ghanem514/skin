@@ -17,7 +17,7 @@ class_names = [
 ]
 
 # Confidence threshold for classifying as "Unknown"
-CONFIDENCE_THRESHOLD = 0.70  # You can adjust this threshold based on your model's performance
+CONFIDENCE_THRESHOLD = 0.50  # You can adjust this threshold based on your model's performance
 
 # Streamlit app
 st.set_page_config(page_title="Skin Disease Classifier", layout="centered")

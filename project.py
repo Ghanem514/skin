@@ -41,10 +41,17 @@ if uploaded_file is not None:
     confidence = float(prediction[0][pred_index]) * 100
 
     # Show result
+    if prediction.shape[1] == len(class_names):
+    pred_index = np.argmax(prediction)
+    pred_class = class_names[pred_index]
+    confidence = float(prediction[0][pred_index]) * 100
+
     st.subheader("Prediction:")
     st.success(f"{pred_class} ({confidence:.2f}%)")
 
-    # Show all probabilities
     st.subheader("All class probabilities:")
     for i, prob in enumerate(prediction[0]):
         st.write(f"{class_names[i]}: {prob*100:.2f}%")
+else:
+    st.error("Prediction output shape doesn't match the number of class names.")
+

@@ -16,9 +16,6 @@ class_names = [
     "Melanocytic Nevi"
 ]
 
-# Confidence threshold for classifying as "Unknown"
-CONFIDENCE_THRESHOLD = 0.50  # You can adjust this threshold based on your model's performance
-
 # Streamlit app
 st.set_page_config(page_title="Skin Disease Classifier", layout="centered")
 st.title("🩺 AI Skin Disease Classifier")
@@ -47,14 +44,8 @@ if uploaded_file is not None:
     # Check if the prediction output matches the number of classes
     if prediction.shape[1] == len(class_names):
         pred_index = np.argmax(prediction)
+        pred_class = class_names[pred_index]
         confidence = float(prediction[0][pred_index]) * 100
-
-        # If confidence is below the threshold, classify as "Unknown"
-        if confidence < CONFIDENCE_THRESHOLD * 100:
-            pred_class = "Unknown"
-            confidence = 0.0
-        else:
-            pred_class = class_names[pred_index]
 
         # Show result
         st.subheader("Prediction:")
@@ -66,3 +57,4 @@ if uploaded_file is not None:
             st.write(f"{class_names[i]}: {prob*100:.2f}%")
     else:
         st.error("Prediction output shape doesn't match the number of class names.")
+
